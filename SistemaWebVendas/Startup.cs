@@ -37,7 +37,8 @@ namespace SistemaWebVendas
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<SistemaWebVendasContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SistemaWebVendasContext")));
+                    options.UseMySql(Configuration.GetConnectionString("SistemaWebVendasContext"), 
+                                    builder => builder.MigrationsAssembly("SistemaWebVendas")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
