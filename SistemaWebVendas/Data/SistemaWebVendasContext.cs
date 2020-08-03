@@ -14,6 +14,8 @@ namespace SistemaWebVendas.Data
         {
         }
 
-        public DbSet<SistemaWebVendas.Models.Departamento> Departamento { get; set; }
+        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Vendedor> Vendedor { get; set; }
+        public DbSet<RegistroDeVendas> RegistroDeVendas { get; set; }
     }
 }

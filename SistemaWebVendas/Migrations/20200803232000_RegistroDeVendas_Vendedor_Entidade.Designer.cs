@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaWebVendas.Data;
 
 namespace SistemaWebVendas.Migrations
 {
     [DbContext(typeof(SistemaWebVendasContext))]
-    partial class SistemaWebVendasContextModelSnapshot : ModelSnapshot
+    [Migration("20200803232000_RegistroDeVendas_Vendedor_Entidade")]
+    partial class RegistroDeVendas_Vendedor_Entidade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
