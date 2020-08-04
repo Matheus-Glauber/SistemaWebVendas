@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SistemaWebVendas.Data;
+using SistemaWebVendas.Services;
 
 namespace SistemaWebVendas
 {
@@ -41,6 +42,7 @@ namespace SistemaWebVendas
                                     builder => builder.MigrationsAssembly("SistemaWebVendas")));
 
             services.AddScoped<PopulaService>();
+            services.AddScoped<VendedorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
