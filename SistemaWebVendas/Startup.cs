@@ -39,14 +39,17 @@ namespace SistemaWebVendas
             services.AddDbContext<SistemaWebVendasContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SistemaWebVendasContext"), 
                                     builder => builder.MigrationsAssembly("SistemaWebVendas")));
+
+            services.AddScoped<PopulaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, PopulaService populaService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                populaService.Popula();
             }
             else
             {
