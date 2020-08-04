@@ -12,6 +12,7 @@ namespace SistemaWebVendas.Models
         public double SalarioBase { get; set; }
         public DateTime DataNascimento { get; set; }
         public Departamento Departamento { get; set; }
+        public int DepartamentoId { get; set; }
         public ICollection<RegistroDeVendas> Vendas { get; set; } = new List<RegistroDeVendas>();
 
         public Vendedor()
