@@ -3,6 +3,7 @@ using SistemaWebVendas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace SistemaWebVendas.Services
@@ -23,7 +24,20 @@ namespace SistemaWebVendas.Services
 
         public void Insert(Vendedor obj)
         {
+            obj.Departamento = _context.Departamento.Find(obj.DepartamentoId);
             _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Vendedor FindById(int id)
+        {
+            return _context.Vendedor.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Vendedor.Find(id);
+            _context.Vendedor.Remove(obj);
             _context.SaveChanges();
         }
     }
