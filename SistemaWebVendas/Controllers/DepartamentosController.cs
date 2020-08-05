@@ -29,9 +29,9 @@ namespace SistemaWebVendas.Controllers
             {
                 return NotFound();
             }
-
+            
             var departamento = await _context.Departamento
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(obj => obj.Vendedores).FirstOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
             {
                 return NotFound();
