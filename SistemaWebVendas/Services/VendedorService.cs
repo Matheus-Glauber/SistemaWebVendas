@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaWebVendas.Data;
 using SistemaWebVendas.Models;
-using System;
+using SistemaWebVendas.Services.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
 
 namespace SistemaWebVendas.Services
 {
@@ -40,6 +38,23 @@ namespace SistemaWebVendas.Services
             var obj = _context.Vendedor.Find(id);
             _context.Vendedor.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Vendedor obj)
+        {
+            if(!_context.Vendedor.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found.");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcorrenciaException(e.Message);
+            }
         }
     }
 }

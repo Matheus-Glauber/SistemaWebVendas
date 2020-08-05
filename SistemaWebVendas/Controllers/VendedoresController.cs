@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SistemaWebVendas.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using SistemaWebVendas.Models;
 using SistemaWebVendas.Models.ViewModels;
 using SistemaWebVendas.Services;
+using SistemaWebVendas.Services.Exceptions;
+using System.Collections.Generic;
 
 namespace SistemaWebVendas.Controllers
 {
@@ -82,6 +77,50 @@ namespace SistemaWebVendas.Controllers
             }
 
             return View(obj);
+
+        }
+
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedorService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Departamento> departamentos = _departamentoService.FindAll();
+            VendedorFormViewModel vfv = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos };
+
+            return View(vfv);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(int id, Vendedor vendedor)
+        {
+            if (id != vendedor.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _vendedorService.Update(vendedor);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcorrenciaException)
+            {
+                return BadRequest();
+            }
 
         }
     }
