@@ -1,4 +1,5 @@
-﻿using SistemaWebVendas.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaWebVendas.Data;
 using SistemaWebVendas.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace SistemaWebVendas.Services
 
         public Vendedor FindById(int id)
         {
-            return _context.Vendedor.FirstOrDefault(obj => obj.Id == id);
+            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
