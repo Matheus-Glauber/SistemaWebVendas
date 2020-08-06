@@ -35,9 +35,16 @@ namespace SistemaWebVendas.Services
 
         public async Task Remove(int id)
         {
-            var obj = await _context.Vendedor.FindAsync(id);
-            _context.Vendedor.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Vendedor.FindAsync(id);
+                _context.Vendedor.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw new IntegridadeException(e.Message + " Causa - Não é possível excluir um vendedor, pois o mesmo possui vendas");
+            }
         }
 
         public async Task Update(Vendedor obj)
