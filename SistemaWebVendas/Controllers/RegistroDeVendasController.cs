@@ -145,6 +145,16 @@ namespace SistemaWebVendas.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> PesquisaSimples()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> PesquisaGrupos()
+        {
+            return View();
+        }
+
         private bool RegistroDeVendasExists(int id)
         {
             return _context.RegistroDeVendas.Any(e => e.Id == id);
