@@ -1,12 +1,17 @@
 ﻿using SistemaWebVendas.Models.Enums;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaWebVendas.Models
 {
     public class RegistroDeVendas
     {
         public int Id { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime Data { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Montante { get; set; }
         public StatusDeVenda Status { get; set; }
         public Vendedor Vendedor { get; set; }
