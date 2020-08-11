@@ -38,18 +38,18 @@ namespace SistemaWebVendas.Data
             Vendedor v7 = new Vendedor(7, "NanaShara", "shara@gmail.com", 1100.00, new DateTime(1997, 06, 09), d3);
             Vendedor v8 = new Vendedor(8, "Julius", "julius@gmail.com", 1100.00, new DateTime(1997, 12, 09), d4);
 
-            RegistroDeVendas rv1 = new RegistroDeVendas(1, new DateTime(2020, 08, 03), 5000.00, StatusDeVenda.Faturado, v2);
+            RegistroDeVendas rv1 = new RegistroDeVendas(1, new DateTime(2020, 08, 11), 5000.00, StatusDeVenda.Faturado, v2);
             RegistroDeVendas rv2 = new RegistroDeVendas(2, new DateTime(2020, 08, 03), 1500.00, StatusDeVenda.Pendente, v2);
             RegistroDeVendas rv3 = new RegistroDeVendas(3, new DateTime(2020, 08, 03), 1500.00, StatusDeVenda.Faturado, v1);
-            RegistroDeVendas rv4 = new RegistroDeVendas(4, new DateTime(2020, 08, 03), 6000.00, StatusDeVenda.Pendente, v1);
-            RegistroDeVendas rv5 = new RegistroDeVendas(5, new DateTime(2020, 08, 03), 200.00, StatusDeVenda.Faturado, v3);
-            RegistroDeVendas rv6 = new RegistroDeVendas(6, new DateTime(2020, 08, 03), 500.00, StatusDeVenda.Faturado, v4);
+            RegistroDeVendas rv4 = new RegistroDeVendas(4, new DateTime(2020, 08, 06), 6000.00, StatusDeVenda.Pendente, v1);
+            RegistroDeVendas rv5 = new RegistroDeVendas(5, new DateTime(2020, 08, 01), 200.00, StatusDeVenda.Faturado, v3);
+            RegistroDeVendas rv6 = new RegistroDeVendas(6, new DateTime(2020, 08, 09), 500.00, StatusDeVenda.Faturado, v4);
             RegistroDeVendas rv7 = new RegistroDeVendas(7, new DateTime(2020, 08, 03), 700.00, StatusDeVenda.Faturado, v5);
             RegistroDeVendas rv8 = new RegistroDeVendas(8, new DateTime(2020, 08, 03), 100.00, StatusDeVenda.Faturado, v6);
             RegistroDeVendas rv9 = new RegistroDeVendas(9, new DateTime(2020, 08, 03), 400.00, StatusDeVenda.Faturado, v7);
-            RegistroDeVendas rv10 = new RegistroDeVendas(10, new DateTime(2020, 08, 03), 100.00, StatusDeVenda.Faturado, v8);
-            RegistroDeVendas rv11 = new RegistroDeVendas(11, new DateTime(2020, 08, 03), 50.00, StatusDeVenda.Cancelado, v8);
-            RegistroDeVendas rv12 = new RegistroDeVendas(12, new DateTime(2020, 08, 03), 500.00, StatusDeVenda.Pendente, v6);
+            RegistroDeVendas rv10 = new RegistroDeVendas(10, new DateTime(2020, 08, 05), 100.00, StatusDeVenda.Faturado, v8);
+            RegistroDeVendas rv11 = new RegistroDeVendas(11, new DateTime(2020, 08, 07), 50.00, StatusDeVenda.Cancelado, v8);
+            RegistroDeVendas rv12 = new RegistroDeVendas(12, new DateTime(2020, 08, 08), 500.00, StatusDeVenda.Pendente, v6);
 
             _context.Departamento.AddRange(d1, d2, d3, d4);
             _context.Vendedor.AddRange(v1, v2, v3, v4, v5, v6);
