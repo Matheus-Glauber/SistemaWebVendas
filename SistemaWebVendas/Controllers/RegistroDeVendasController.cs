@@ -164,9 +164,23 @@ namespace SistemaWebVendas.Controllers
             return View(result);
         }
 
-        public async Task<IActionResult> PesquisaGrupos()
+        public async Task<IActionResult> PesquisaGrupos(DateTime? dtmin, DateTime? dtmax)
         {
-            return View();
+            if (!dtmin.HasValue)
+            {
+                dtmin = DateTime.Now;
+            }
+
+            if (!dtmax.HasValue)
+            {
+                dtmax = DateTime.Now;
+            }
+
+            ViewData["dtmin"] = dtmin.Value.ToString("yyyy-MM-dd");
+            ViewData["dtmax"] = dtmax.Value.ToString("yyyy-MM-dd");
+
+            var result = await BuscarPorDataAgrupada(dtmin, dtmax);
+            return View(result);
         }
 
         private bool RegistroDeVendasExists(int id)
@@ -187,6 +201,21 @@ namespace SistemaWebVendas.Controllers
             }
 
             return await result.Include(x => x.Vendedor).Include(x => x.Vendedor.Departamento).OrderByDescending(x => x.Data).ToListAsync();
+        }
+
+        private async Task<List<IGrouping<Departamento, RegistroDeVendas>>> BuscarPorDataAgrupada(DateTime? dtmin, DateTime? dtmax)
+        {
+            var result = from obj in _context.RegistroDeVendas select obj;
+            if (dtmin.HasValue)
+            {
+                result = result.Where(x => x.Data >= dtmin.Value);
+            }
+            if (dtmax.HasValue)
+            {
+                result = result.Where(x => x.Data <= dtmax.Value);
+            }
+
+            return await result.Include(x => x.Vendedor).Include(x => x.Vendedor.Departamento).OrderByDescending(x => x.Data).GroupBy(x => x.Vendedor.Departamento).ToListAsync();
         }
     }
 }

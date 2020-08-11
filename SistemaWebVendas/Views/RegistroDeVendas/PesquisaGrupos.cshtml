@@ -1,7 +1,81 @@
-﻿
+﻿@model IEnumerable<IGrouping<Departamento, RegistroDeVendas>>;
+
 @{
     ViewData["Title"] = "Pesquisa Grupos";
+    DateTime dtmin = DateTime.Parse(ViewData["dtmin"] as string);
+    DateTime dtmax = DateTime.Parse(ViewData["dtmax"] as string);
 }
 
-<h2>PesquisaGrupos</h2>
+<h2>@ViewData["Title"]</h2>
 
+<form class="form-horizontal" role="search">
+    <fieldset>
+        <div class="form-group">
+            <label for="dtmin" class="col-md-2 control-label">Data Inicial</label>
+            <div class="col-md-10">
+                <input type="date" name="dtmin" class="form-control" value=@ViewData["dtmin"] />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dtmax" class="col-md-2 control-label">Data Final</label>
+            <div class="col-md-10">
+                <input type="date" name="dtmax" class="form-control" value=@ViewData["dtmax"] />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@foreach(var grupoDepartamento in Model)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Departamento: @grupoDepartamento.Key.Nome, Total de vendas: @grupoDepartamento.Key.TotalDeVendas(dtmin, dtmax).ToString("F2")</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            Data
+                        </th>
+                        <th>
+                            Montante
+                        </th>
+                        <th>
+                            Vendedor
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in grupoDepartamento)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Montante)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vendedor.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
